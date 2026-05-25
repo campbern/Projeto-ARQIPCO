@@ -60,3 +60,126 @@ Sinalizadores de macro para impedir que o compilador realize a dupla inclusão d
 * <string.h>
 
 ------------------------------
+
+## DOCUMENTAÇÃO DO ARQUIVO JOGOS.C
+Arquivo responsável pela implementação das funcionalidades da Loja de Games. Contém a lógica de manipulação dos dados, interação com o usuário e persistência em arquivos.
+
+## REQUISITOS CONTEMPLADOS NO JOGOS.C
+Manipulação de vetores de struct em memória RAM
+Entrada e saída de dados via terminal
+Validação de dados de entrada
+Controle de fluxo (if, while, for)
+Manipulação de arquivos (leitura e escrita)
+Uso de ponteiros para alteração de variáveis externas
+Implementação de matriz para avaliações
+
+## ARQUIVOS — (Requisito 3.8)
+Função: carregarJogos
+Responsável por ler os dados do arquivo jogos.txt e armazená-los em memória.
+
+Funcionamento:
+Abre o arquivo no modo leitura (r)
+Lê linha por linha usando fscanf
+Preenche o vetor de structs
+Atualiza o total de jogos carregados
+Realiza validação para evitar overflow do vetor
+
+Função: salvarJogos
+Responsável por gravar os dados atuais no arquivo jogos.txt.
+
+Funcionamento:
+Abre o arquivo no modo escrita (w)
+Sobrescreve os dados antigos
+Percorre o vetor e grava cada jogo no formato:
+nome;genero;preco;classificacao;downloads
+
+## CADASTRO — (Requisito 3.2)
+Função: cadastrarJogo
+Permite inserir novos jogos no sistema.
+
+Funcionamento:
+Verifica limite máximo (MAX_JOGOS)
+Recebe dados via teclado
+Valida preço (não permite valores negativos)
+Inicializa downloads com 0
+Armazena no vetor
+Salva automaticamente no arquivo
+
+Função: listarJogos
+Exibe todos os jogos cadastrados.
+
+Funcionamento:
+Percorre o vetor
+Mostra informações completas de cada jogo:
+Nome
+Gênero
+Preço
+Classificação
+Downloads
+
+## COMPRAS — (Requisito 3.4)
+Função: registrarCompra
+Registra uma compra/download de jogo.
+
+Funcionamento:
+Lista jogos disponíveis
+Permite seleção pelo usuário
+Valida entrada
+Atualiza número de downloads
+Calcula valores financeiros:
+Faturamento bruto (100%)
+Faturamento líquido (80%) → desconto de 20% de imposto
+Armazena compra no arquivo compras.txt
+Atualiza arquivo de jogos
+
+## RELATÓRIOS — (Requisito 3.5)
+Função: relatorios
+Gera estatísticas gerais do sistema.
+
+Relatórios gerados:
+Jogo mais vendido
+Total de downloads
+Faturamento bruto
+Faturamento líquido
+Média de preços dos jogos
+Média de preços dos jogos vendidos
+Jogo mais caro
+Jogo mais barato
+
+Funcionamento:
+Percorre o vetor
+Realiza cálculos acumulativos
+Determina valores máximos e mínimos
+
+
+## AVALIAÇÕES — (Requisito 3.7)
+Estrutura lógica:
+Matriz avaliacoes[linhas][colunas]
+Linhas = jogos
+Colunas = notas
+Vetor auxiliar qtdAvaliacoes[]
+Controla quantas avaliações cada jogo possui
+
+Função: registrarAvaliacoes
+Permite adicionar avaliações aos jogos.
+
+Funcionamento:
+Exibe lista de jogos
+Permite escolha do usuário
+Verifica limite máximo de avaliações
+Valida nota (0 a 10)
+Armazena a nota na matriz
+
+Função: mostrarAvaliacoes
+Exibe relatório das avaliações.
+
+Informações exibidas:
+Média de cada jogo
+Total de avaliações registradas
+Jogo mais bem avaliado
+Funcionamento:
+Percorre a matriz
+Calcula média das notas por jogo
+Identifica maior média
+
+-----------------------------
