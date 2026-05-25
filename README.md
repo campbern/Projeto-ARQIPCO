@@ -1,5 +1,6 @@
 # Projeto-IPCO
 Projeto de Introdução à Programação de Computadores (1ºSem/2026)
+
 ------------------------------
 
 ## DOCUMENTAÇÃO DO ARQUIVO JOGOS.H
@@ -17,11 +18,11 @@ Especificação técnica do cabeçalho do projeto da Loja de Games. Define:
 ## ESTRUTURA DA STRUCT (Requisito 3.1)
 
 typedef struct {
-    char nome[100];
-    char genero[50];
-    float preco;
-    int classificacao;
-    int downloads;
+  char nome[100];
+  char genero[50];
+  float preco;
+  int classificacao;
+  int downloads;
 } Jogo;
 
 ## CONSTANTES GLOBAIS DEFINIDAS
