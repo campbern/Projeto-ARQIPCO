@@ -1,4 +1,4 @@
-# Projeto-IPCO
+# Projeto-ARQIPCO
 Projeto de Introdução à Programação de Computadores (1ºSem/2026)
 
 ------------------------------
