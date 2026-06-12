@@ -6,8 +6,15 @@ int main()
 
     // Declarações
     Jogo jogos[MAX_JOGOS];
+
     int quantidadeJogos = 0;
     int opcao;
+
+    float faturamentoBruto = 0.0;
+    float faturamentoLiquido = 0.0;
+
+    int avaliacoes[MAX_JOGOS][MAX_AVALIACOES] = {0};
+    int qtdAvaliacoes[MAX_JOGOS] = {0};
 
     // Carregar jogos
     carregarJogos(jogos, &quantidadeJogos);
@@ -32,7 +39,7 @@ int main()
         {
 
         case 1:
-            cadastrarJogo(jogos, quantidadeJogos); // cadastrar
+            cadastrarJogo(jogos, &quantidadeJogos); // cadastrar
             break;
 
         case 2:
@@ -40,19 +47,35 @@ int main()
             break;
 
         case 3:
-            // registrarCompra(); // comprar
+            registrarCompra(
+                jogos,
+                quantidadeJogos,
+                &faturamentoBruto,
+                &faturamentoLiquido); // comprar
             break;
 
         case 4:
-            // avaliar
+            registrarAvaliacoes(
+                avaliacoes,
+                qtdAvaliacoes,
+                quantidadeJogos,
+                jogos); // avaliar
             break;
 
         case 5:
-            // relatorios
+            relatorios(
+                jogos,
+                quantidadeJogos,
+                faturamentoBruto,
+                faturamentoLiquido); // relatorios
             break;
 
         case 6:
-            // mostrar avaliacoes
+            mostrarAvaliacoes(
+                jogos,
+                avaliacoes,
+                qtdAvaliacoes,
+                quantidadeJogos); // mostrar avaliacoes
             break;
 
         case 0:
