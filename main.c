@@ -53,7 +53,6 @@ int main()
 
         case 1:
             cadastrarJogo(jogos, &quantidadeJogos); // cadastrar
-            salvarJogos(jogos, quantidadeJogos);    // salvar jogos após cadastro
             break;
 
         case 2:
@@ -80,8 +79,6 @@ int main()
                     quantidadeJogos,
                     &faturamentoBruto,
                     &faturamentoLiquido); // comprar
-
-                salvarJogos(jogos, quantidadeJogos); // atualizando jogos disponiveis
             }
             break;
 
