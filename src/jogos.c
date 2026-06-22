@@ -73,7 +73,6 @@ void salvarJogos(Jogo jogos[], int total)
 // ======================================================
 void cadastrarJogo(Jogo jogos[], int *total)
 {
-
     if (*total >= MAX_JOGOS)
     {
         printf("Limite de jogos atingido.\n");
@@ -90,6 +89,7 @@ void cadastrarJogo(Jogo jogos[], int *total)
     printf("Genero: ");
     scanf(" %[^\n]", novo.genero);
 
+    // Validar preco
     do
     {
         printf("Preco: ");
@@ -105,11 +105,18 @@ void cadastrarJogo(Jogo jogos[], int *total)
 
     } while (novo.preco < 0);
 
-    printf("Classificacao: ");
-    scanf("%d", &novo.classificacao);
+    // Validar classificacao
+    do
+    {
+        printf("Classificacao (0 a 18): ");
+        scanf("%d", &novo.classificacao);
 
-    while (getchar() != '\n')
-        ;
+        if (novo.classificacao < 0 || novo.classificacao > 18)
+        {
+            printf("Classificacao invalida.\n");
+        }
+
+    } while (novo.classificacao < 0 || novo.classificacao > 18);
 
     novo.downloads = 0;
 
@@ -122,7 +129,7 @@ void cadastrarJogo(Jogo jogos[], int *total)
 }
 
 // ======================================================
-// LISTAR JOGOS
+// REQUISITOS 3.3 - LISTAR JOGOS
 // ======================================================
 void listarJogos(Jogo jogos[], int total)
 {
@@ -309,14 +316,17 @@ void registrarAvaliacoes(int avaliacoes[][MAX_AVALIACOES],
         return;
     }
 
-    printf("Nota (0-10): ");
-    scanf("%d", &nota);
-
-    if (nota < 0 || nota > 10)
+    do
     {
-        printf("Nota invalida.\n");
-        return;
-    }
+        printf("Nota (0-10): ");
+        scanf("%d", &nota);
+
+        if (nota < 0 || nota > 10)
+        {
+            printf("Nota invalida. Digite uma nota entre 0 e 10.\n");
+        }
+
+    } while (nota < 0 || nota > 10);
 
     avaliacoes[jogo][qtdAvaliacoes[jogo]] = nota;
     qtdAvaliacoes[jogo]++;
@@ -365,6 +375,12 @@ void mostrarAvaliacoes(Jogo jogos[],
                 melhor = i;
             }
         }
+    }
+
+    if (totalAvaliacoes == 0)
+    {
+        printf("Nenhuma avaliacao registrada.\n");
+        return;
     }
 
     printf("Total avaliacoes: %d\n", totalAvaliacoes);
