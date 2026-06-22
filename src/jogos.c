@@ -306,6 +306,12 @@ void registrarAvaliacoes(int avaliacoes[][MAX_AVALIACOES],
 
     int jogo, nota;
 
+    if (total == 0)
+    {
+        printf("Nenhum jogo cadastrado.\n");
+        return;
+    }
+
     printf("\n===== AVALIACOES =====\n");
 
     // Exibir jogos disponíveis para avaliação
@@ -363,6 +369,12 @@ void mostrarAvaliacoes(Jogo jogos[],
     int melhor = -1;
     float melhorMedia = 0;
     int totalAvaliacoes = 0;
+
+    if (total == 0)
+    {
+        printf("Nenhum jogo cadastrado.\n");
+        return;
+    }
 
     printf("\n===== RELATORIO DE AVALIACOES =====\n");
 

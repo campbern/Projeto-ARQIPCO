@@ -4,15 +4,18 @@
 int main()
 {
 
-    // Declarações
+    // Jogos cadastrados
     Jogo jogos[MAX_JOGOS];
-
     int quantidadeJogos = 0;
+
+    // Menu
     int opcao;
 
+    // Faturamento
     float faturamentoBruto = 0.0;
     float faturamentoLiquido = 0.0;
 
+    // Avaliações
     int avaliacoes[MAX_JOGOS][MAX_AVALIACOES] = {0};
     int qtdAvaliacoes[MAX_JOGOS] = {0};
 
@@ -35,7 +38,7 @@ int main()
         printf("0 - Sair\n");
 
         printf("Opcao: ");
-        // Verificando a opção do usuário
+        // Validar entrada do menu
         if (scanf("%d", &opcao) != 1)
         {
             printf("Entrada invalida!\n");
@@ -52,82 +55,43 @@ int main()
         {
 
         case 1:
-            cadastrarJogo(jogos, &quantidadeJogos); // cadastrar
+            cadastrarJogo(jogos, &quantidadeJogos);
             break;
 
         case 2:
-            if (quantidadeJogos == 0)
-            {
-                printf("Nenhum jogo cadastrado.\n");
-            }
-            else
-            {
-                listarJogos(jogos, quantidadeJogos); // listar
-            }
+            listarJogos(jogos, quantidadeJogos);
             break;
 
         case 3:
-            // Verifica se tem jogos para dps comprar
-            if (quantidadeJogos == 0)
-            {
-                printf("Nenhum jogo cadastrado.\n");
-            }
-            else
-            {
-                registrarCompra(
-                    jogos,
-                    quantidadeJogos,
-                    &faturamentoBruto,
-                    &faturamentoLiquido); // comprar
-            }
+            registrarCompra(
+                jogos,
+                quantidadeJogos,
+                &faturamentoBruto,
+                &faturamentoLiquido);
             break;
 
         case 4:
-            // verifica se tem jogos para avaliar
-            if (quantidadeJogos == 0)
-            {
-                printf("Nenhum jogo cadastrado.\n");
-            }
-            else
-            {
-                registrarAvaliacoes(
-                    avaliacoes,
-                    qtdAvaliacoes,
-                    quantidadeJogos,
-                    jogos); // avaliar
-            }
+            registrarAvaliacoes(
+                avaliacoes,
+                qtdAvaliacoes,
+                quantidadeJogos,
+                jogos);
             break;
 
         case 5:
-            // Verifica antes de gerar um relatório
-            if (quantidadeJogos == 0)
-            {
-                printf("Nenhum jogo cadastrado.\n");
-            }
-            else
-            {
-                relatorios(
-                    jogos,
-                    quantidadeJogos,
-                    faturamentoBruto,
-                    faturamentoLiquido); // relatorios
-            }
+            relatorios(
+                jogos,
+                quantidadeJogos,
+                faturamentoBruto,
+                faturamentoLiquido);
             break;
 
         case 6:
-            // Verifica antes de mostrar as avaliações
-            if (quantidadeJogos == 0)
-            {
-                printf("Nenhum jogo cadastrado.\n");
-            }
-            else
-            {
-                mostrarAvaliacoes(
-                    jogos,
-                    avaliacoes,
-                    qtdAvaliacoes,
-                    quantidadeJogos); // mostrar avaliacoes
-            }
+            mostrarAvaliacoes(
+                jogos,
+                avaliacoes,
+                qtdAvaliacoes,
+                quantidadeJogos);
             break;
 
         case 0:
