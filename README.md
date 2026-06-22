@@ -1,5 +1,16 @@
 # Projeto-ARQIPCO
-Projeto de Introdução à Programação de Computadores (1ºSem/2026)
+
+Projeto desenvolvido para a disciplina de Introdução à Programação de Computadores (1ºSem/2026).
+
+O sistema simula uma Loja de Games, permitindo:
+
+* Cadastro de jogos
+* Listagem de jogos
+* Registro de compras
+* Controle de faturamento
+* Registro de avaliações
+* Geração de relatórios
+* Persistência de dados em arquivos texto
 
 ------------------------------
 
@@ -234,6 +245,7 @@ Variáveis financeiras:
 
 ## ESTRUTURA DO PROJETO
 
+```text
 Projeto-ARQIPCO/
 │
 ├── src/
@@ -245,7 +257,22 @@ Projeto-ARQIPCO/
 │   ├── jogos.txt
 │   └── compras.txt
 │
+├── loja.exe
+│
 └── README.md
+```
+
+## COMPILAÇÃO
+
+```bash
+gcc src/main.c src/jogos.c -o loja.exe
+```
+
+## EXECUÇÃO
+
+```bash
+./loja.exe
+```
 
 -----------------------------
 
