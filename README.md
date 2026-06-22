@@ -17,36 +17,48 @@ Especificação técnica do cabeçalho do projeto da Loja de Games. Define:
 
 ## ESTRUTURA DA STRUCT (Requisito 3.1)
 
+```c
 typedef struct {
-  char nome[100];
-  char genero[50];
-  float preco;
-  int classificacao;
-  int downloads;
+    char nome[100];
+    char genero[50];
+    float preco;
+    int classificacao;
+    int downloads;
 } Jogo;
+```
 
 ## CONSTANTES GLOBAIS DEFINIDAS
 * MAX_JOGOS (100): Define o limite máximo de armazenamento de elementos no vetor de structs alocado na memória RAM.
 * MAX_AVALIACOES (10): Define o limite máximo de colunas na matriz de notas, limitando a quantidade de avaliações permitidas por jogo.
 
-## PROTÓTIPOS DAS FUNÇÕES DEFINDAS
+## PROTÓTIPOS DAS FUNÇÕES DEFINIDAS
 Arquivos (Requisito 3.8)
-* void carregarJogos(Jogo jogos[], int *total);
-* void salvarJogos(Jogo jogos[], int total);
+```c
+void carregarJogos(Jogo jogos[], int *total);
+void salvarJogos(Jogo jogos[], int total);
+```
 
 Cadastro (Requisito 3.2)
-* void cadastrarJogo(Jogo jogos[], int *total);
-* void listarJogos(Jogo jogos[], int total);
+```c
+void cadastrarJogo(Jogo jogos[], int *total);
+void listarJogos(Jogo jogos[], int total);
+```
 
 Compras (Requisito 3.4)
-* void registrarCompra(Jogo jogos[], int total, float *faturamentoBruto, float *faturamentoLiquido);
+```c
+void registrarCompra(Jogo jogos[], int total, float *faturamentoBruto, float *faturamentoLiquido);
+```
 
 Relatórios (Requisito 3.5)
-* void relatorios(Jogo jogos[], int total, float faturamentoBruto, float faturamentoLiquido);
+```c
+void relatorios(Jogo jogos[], int total, float faturamentoBruto, float faturamentoLiquido);
+```
 
 Avaliações (Requisito 3.7)
-* void registrarAvaliacoes(int avaliacoes[][MAX_AVALIACOES], int qtdAvaliacoes[], int total, Jogo jogos[]);
-* void mostrarAvaliacoes(Jogo jogos[], int avaliacoes[][MAX_AVALIACOES], int qtdAvaliacoes[], int total);
+```c
+void registrarAvaliacoes(int avaliacoes[][MAX_AVALIACOES], int qtdAvaliacoes[], int total, Jogo jogos[]);
+void mostrarAvaliacoes(Jogo jogos[], int avaliacoes[][MAX_AVALIACOES], int qtdAvaliacoes[], int total);
+```
 
 ## DIRETIVAS DE COMPILAÇÃO E SEGURANÇA
 Sinalizadores de macro para impedir que o compilador realize a dupla inclusão do cabeçalho durante o processo de linkagem dos módulos:
@@ -65,13 +77,13 @@ Sinalizadores de macro para impedir que o compilador realize a dupla inclusão d
 Arquivo responsável pela implementação das funcionalidades da Loja de Games. Contém a lógica de manipulação dos dados, interação com o usuário e persistência em arquivos.
 
 ## REQUISITOS CONTEMPLADOS NO JOGOS.C
-Manipulação de vetores de struct em memória RAM
-Entrada e saída de dados via terminal
-Validação de dados de entrada
-Controle de fluxo (if, while, for)
-Manipulação de arquivos (leitura e escrita)
-Uso de ponteiros para alteração de variáveis externas
-Implementação de matriz para avaliações
+* Manipulação de vetores de struct em memória RAM
+* Entrada e saída de dados via terminal
+* Validação de dados de entrada
+* Controle de fluxo (if, while e for)
+* Manipulação de arquivos
+* Uso de ponteiros
+* Implementação de matriz para avaliações
 
 ## ARQUIVOS — (Requisito 3.8)
 Função: carregarJogos
@@ -181,5 +193,80 @@ Funcionamento:
 Percorre a matriz
 Calcula média das notas por jogo
 Identifica maior média
+
+-----------------------------
+
+## DOCUMENTAÇÃO DO ARQUIVO MAIN.C
+
+Arquivo responsável pelo controle geral do sistema.
+
+Funções principais:
+* Inicialização das estruturas de dados
+* Carregamento dos jogos cadastrados
+* Exibição do menu principal
+* Controle das opções escolhidas pelo usuário
+* Encerramento do programa
+
+## ESTRUTURAS UTILIZADAS
+
+Vetor de jogos:
+* Jogo jogos[MAX_JOGOS];
+
+Matriz de avaliações:
+* int avaliacoes[MAX_JOGOS][MAX_AVALIACOES];
+
+Vetor auxiliar:
+* int qtdAvaliacoes[MAX_JOGOS];
+
+Variáveis financeiras:
+* faturamentoBruto
+* faturamentoLiquido
+
+## FLUXO DE EXECUÇÃO
+
+1. Carrega os jogos do arquivo.
+2. Exibe o menu principal.
+3. Executa a funcionalidade escolhida.
+4. Repete até a opção 0.
+5. Salva os dados antes de encerrar.
+
+-----------------------------
+
+## ESTRUTURA DO PROJETO
+
+Projeto-ARQIPCO/
+│
+├── src/
+│   ├── main.c
+│   ├── jogos.c
+│   └── jogos.h
+│
+├── dados/
+│   ├── jogos.txt
+│   └── compras.txt
+│
+└── README.md
+
+-----------------------------
+
+## FORMATO DOS ARQUIVOS
+
+Arquivo jogos.txt
+
+nome;genero;preco;classificacao;downloads
+
+Exemplo:
+
+GTA V;Acao;119.90;18;5
+Minecraft;Sandbox;89.90;10;2
+
+Arquivo compras.txt
+
+nome_jogo;valor_unitario;quantidade
+
+Exemplo:
+
+GTA V;119.90;5
+Minecraft;89.90;2
 
 -----------------------------
