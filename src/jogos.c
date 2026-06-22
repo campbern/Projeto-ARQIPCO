@@ -9,7 +9,7 @@
 void carregarJogos(Jogo jogos[], int *total)
 {
 
-    FILE *arquivo = fopen("jogos.txt", "r");
+    FILE *arquivo = fopen("dados/jogos.txt", "r");
 
     if (arquivo == NULL)
     {
@@ -46,7 +46,7 @@ void carregarJogos(Jogo jogos[], int *total)
 void salvarJogos(Jogo jogos[], int total)
 {
 
-    FILE *arquivo = fopen("jogos.txt", "w");
+    FILE *arquivo = fopen("dados/jogos.txt", "w");
 
     if (arquivo == NULL)
     {
@@ -197,7 +197,7 @@ void registrarCompra(Jogo jogos[], int total,
     *fatBruto += valor;
     *fatLiquido += valor * 0.8;
 
-    FILE *arquivo = fopen("compras.txt", "a");
+    FILE *arquivo = fopen("dados/compras.txt", "a");
 
     if (arquivo != NULL)
     {
