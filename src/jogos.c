@@ -6,11 +6,14 @@
 // ======================================================
 // REQUISITO 3.8 — CARREGAR JOGOS
 // ======================================================
-void carregarJogos(Jogo jogos[], int *total) {
+void carregarJogos(Jogo jogos[], int *total)
+{
 
-    FILE *arquivo = fopen("jogos.txt", "r");
+    FILE *arquivo = fopen("dados/jogos.txt", "r");
 
-    if (arquivo == NULL) {
+    // Verifica se o arquivo existe
+    if (arquivo == NULL)
+    {
         printf("[Sistema] Arquivo jogos.txt nao encontrado.\n");
         *total = 0;
         return;
@@ -18,17 +21,21 @@ void carregarJogos(Jogo jogos[], int *total) {
 
     *total = 0;
 
+    // Ler os jogos do arquivo
     while (fscanf(arquivo,
-           " %99[^;];%49[^;];%f;%d;%d\n",
-           jogos[*total].nome,
-           jogos[*total].genero,
-           &jogos[*total].preco,
-           &jogos[*total].classificacao,
-           &jogos[*total].downloads) == 5) {
+                  " %99[^;];%49[^;];%f;%d;%d\n",
+                  jogos[*total].nome,
+                  jogos[*total].genero,
+                  &jogos[*total].preco,
+                  &jogos[*total].classificacao,
+                  &jogos[*total].downloads) == 5)
+    {
 
         (*total)++;
 
-        if (*total >= MAX_JOGOS) break;
+        // Evita ultrapassar o limite do vetor
+        if (*total >= MAX_JOGOS)
+            break;
     }
 
     fclose(arquivo);
@@ -39,16 +46,21 @@ void carregarJogos(Jogo jogos[], int *total) {
 // ======================================================
 // REQUISITO 3.8 — SALVAR JOGOS
 // ======================================================
-void salvarJogos(Jogo jogos[], int total) {
+void salvarJogos(Jogo jogos[], int total)
+{
 
-    FILE *arquivo = fopen("jogos.txt", "w");
+    FILE *arquivo = fopen("dados/jogos.txt", "w");
 
-    if (arquivo == NULL) {
+    // Verifica se o arquivo foi aberto
+    if (arquivo == NULL)
+    {
         printf("Erro ao salvar arquivo.\n");
         return;
     }
 
-    for (int i = 0; i < total; i++) {
+    // Salvar todos os jogos no arquivo
+    for (int i = 0; i < total; i++)
+    {
         fprintf(arquivo,
                 "%s;%s;%.2f;%d;%d\n",
                 jogos[i].nome,
@@ -64,9 +76,10 @@ void salvarJogos(Jogo jogos[], int total) {
 // ======================================================
 // REQUISITO 3.2 — CADASTRAR JOGO
 // ======================================================
-void cadastrarJogo(Jogo jogos[], int *total) {
-
-    if (*total >= MAX_JOGOS) {
+void cadastrarJogo(Jogo jogos[], int *total)
+{
+    if (*total >= MAX_JOGOS)
+    {
         printf("Limite de jogos atingido.\n");
         return;
     }
@@ -81,22 +94,34 @@ void cadastrarJogo(Jogo jogos[], int *total) {
     printf("Genero: ");
     scanf(" %[^\n]", novo.genero);
 
-    do {
+    // Validar preco
+    do
+    {
         printf("Preco: ");
         scanf("%f", &novo.preco);
 
-        while (getchar() != '\n');
+        while (getchar() != '\n')
+            ;
 
-        if (novo.preco < 0) {
+        if (novo.preco < 0)
+        {
             printf("Preco invalido.\n");
         }
 
     } while (novo.preco < 0);
 
-    printf("Classificacao: ");
-    scanf("%d", &novo.classificacao);
+    // Validar classificacao
+    do
+    {
+        printf("Classificacao (0 a 18): ");
+        scanf("%d", &novo.classificacao);
 
-    while (getchar() != '\n');
+        if (novo.classificacao < 0 || novo.classificacao > 18)
+        {
+            printf("Classificacao invalida.\n");
+        }
+
+    } while (novo.classificacao < 0 || novo.classificacao > 18);
 
     novo.downloads = 0;
 
@@ -109,18 +134,22 @@ void cadastrarJogo(Jogo jogos[], int *total) {
 }
 
 // ======================================================
-// LISTAR JOGOS
+// REQUISITOS 3.3 - LISTAR JOGOS
 // ======================================================
-void listarJogos(Jogo jogos[], int total) {
+void listarJogos(Jogo jogos[], int total)
+{
 
-    if (total == 0) {
+    if (total == 0)
+    {
         printf("Nenhum jogo cadastrado.\n");
         return;
     }
 
     printf("\n===== LISTA DE JOGOS =====\n");
 
-    for (int i = 0; i < total; i++) {
+    // Exibir todos os jogos cadastrados
+    for (int i = 0; i < total; i++)
+    {
 
         printf("\n%d - %s\n", i + 1, jogos[i].nome);
         printf("Genero: %s\n", jogos[i].genero);
@@ -134,9 +163,11 @@ void listarJogos(Jogo jogos[], int total) {
 // REQUISITO 3.4 — REGISTRAR COMPRA
 // ======================================================
 void registrarCompra(Jogo jogos[], int total,
-                     float *fatBruto, float *fatLiquido) {
+                     float *fatBruto, float *fatLiquido)
+{
 
-    if (total == 0) {
+    if (total == 0)
+    {
         printf("Nenhum jogo cadastrado.\n");
         return;
     }
@@ -145,7 +176,9 @@ void registrarCompra(Jogo jogos[], int total,
 
     printf("\n===== JOGOS DISPONIVEIS =====\n");
 
-    for (int i = 0; i < total; i++) {
+    // Exibir todos os jogos cadastrados
+    for (int i = 0; i < total; i++)
+    {
         printf("%d - %s | R$ %.2f\n",
                i + 1,
                jogos[i].nome,
@@ -156,7 +189,9 @@ void registrarCompra(Jogo jogos[], int total,
     scanf("%d", &opcao);
     opcao--;
 
-    if (opcao < 0 || opcao >= total) {
+    // Validar jogo escolhido
+    if (opcao < 0 || opcao >= total)
+    {
         printf("Opcao invalida.\n");
         return;
     }
@@ -164,21 +199,26 @@ void registrarCompra(Jogo jogos[], int total,
     printf("Quantidade: ");
     scanf("%d", &quantidade);
 
-    if (quantidade <= 0) {
+    if (quantidade <= 0)
+    {
         printf("Quantidade invalida.\n");
         return;
     }
 
+    // Atualizar quantidade de downloads
     jogos[opcao].downloads += quantidade;
 
+    // Calcular faturamento
     float valor = jogos[opcao].preco * quantidade;
 
     *fatBruto += valor;
     *fatLiquido += valor * 0.8;
 
-    FILE *arquivo = fopen("compras.txt", "a");
+    // Registrar compra no arquivo
+    FILE *arquivo = fopen("dados/compras.txt", "a");
 
-    if (arquivo != NULL) {
+    if (arquivo != NULL)
+    {
         fprintf(arquivo,
                 "%s;%.2f;%d\n",
                 jogos[opcao].nome,
@@ -196,9 +236,11 @@ void registrarCompra(Jogo jogos[], int total,
 // REQUISITO 3.5 — RELATORIOS
 // ======================================================
 void relatorios(Jogo jogos[], int total,
-                float fatBruto, float fatLiquido) {
+                float fatBruto, float fatLiquido)
+{
 
-    if (total == 0) {
+    if (total == 0)
+    {
         printf("Nenhum jogo cadastrado.\n");
         return;
     }
@@ -212,7 +254,9 @@ void relatorios(Jogo jogos[], int total,
     float somaVendidos = 0;
     int qtdVendidos = 0;
 
-    for (int i = 0; i < total; i++) {
+    // Percorre todos os jogos para gerar estatísticas
+    for (int i = 0; i < total; i++)
+    {
 
         totalDownloads += jogos[i].downloads;
         somaPrecos += jogos[i].preco;
@@ -226,12 +270,14 @@ void relatorios(Jogo jogos[], int total,
         if (jogos[i].preco < jogos[maisBarato].preco)
             maisBarato = i;
 
-        if (jogos[i].downloads > 0) {
+        if (jogos[i].downloads > 0)
+        {
             somaVendidos += jogos[i].preco;
             qtdVendidos++;
         }
     }
 
+    // Exibir relatório geral
     printf("\n===== RELATORIOS =====\n");
     printf("Mais vendido: %s\n", jogos[maisVendido].nome);
     printf("Total downloads: %d\n", totalDownloads);
@@ -239,7 +285,8 @@ void relatorios(Jogo jogos[], int total,
     printf("Faturamento liquido: R$ %.2f\n", fatLiquido);
     printf("Media geral: R$ %.2f\n", somaPrecos / total);
 
-    if (qtdVendidos > 0) {
+    if (qtdVendidos > 0)
+    {
         printf("Media vendidos: R$ %.2f\n",
                somaVendidos / qtdVendidos);
     }
@@ -254,13 +301,22 @@ void relatorios(Jogo jogos[], int total,
 void registrarAvaliacoes(int avaliacoes[][MAX_AVALIACOES],
                          int qtdAvaliacoes[],
                          int total,
-                         Jogo jogos[]) {
+                         Jogo jogos[])
+{
 
     int jogo, nota;
 
+    if (total == 0)
+    {
+        printf("Nenhum jogo cadastrado.\n");
+        return;
+    }
+
     printf("\n===== AVALIACOES =====\n");
 
-    for (int i = 0; i < total; i++) {
+    // Exibir jogos disponíveis para avaliação
+    for (int i = 0; i < total; i++)
+    {
         printf("%d - %s\n", i + 1, jogos[i].nome);
     }
 
@@ -268,24 +324,33 @@ void registrarAvaliacoes(int avaliacoes[][MAX_AVALIACOES],
     scanf("%d", &jogo);
     jogo--;
 
-    if (jogo < 0 || jogo >= total) {
+    if (jogo < 0 || jogo >= total)
+    {
         printf("Jogo invalido.\n");
         return;
     }
 
-    if (qtdAvaliacoes[jogo] >= MAX_AVALIACOES) {
+    // Verificar limite de avaliações do jogo
+    if (qtdAvaliacoes[jogo] >= MAX_AVALIACOES)
+    {
         printf("Limite atingido.\n");
         return;
     }
 
-    printf("Nota (0-10): ");
-    scanf("%d", &nota);
+    // Validar nota informada
+    do
+    {
+        printf("Nota (0-10): ");
+        scanf("%d", &nota);
 
-    if (nota < 0 || nota > 10) {
-        printf("Nota invalida.\n");
-        return;
-    }
+        if (nota < 0 || nota > 10)
+        {
+            printf("Nota invalida. Digite uma nota entre 0 e 10.\n");
+        }
 
+    } while (nota < 0 || nota > 10);
+
+    // Armazenar avaliação
     avaliacoes[jogo][qtdAvaliacoes[jogo]] = nota;
     qtdAvaliacoes[jogo]++;
 
@@ -298,24 +363,35 @@ void registrarAvaliacoes(int avaliacoes[][MAX_AVALIACOES],
 void mostrarAvaliacoes(Jogo jogos[],
                        int avaliacoes[][MAX_AVALIACOES],
                        int qtdAvaliacoes[],
-                       int total) {
+                       int total)
+{
 
     int melhor = -1;
     float melhorMedia = 0;
     int totalAvaliacoes = 0;
 
+    if (total == 0)
+    {
+        printf("Nenhum jogo cadastrado.\n");
+        return;
+    }
+
     printf("\n===== RELATORIO DE AVALIACOES =====\n");
 
-    for (int i = 0; i < total; i++) {
+    // Calcular média de cada jogo
+    for (int i = 0; i < total; i++)
+    {
 
         int soma = 0;
 
-        for (int j = 0; j < qtdAvaliacoes[i]; j++) {
+        for (int j = 0; j < qtdAvaliacoes[i]; j++)
+        {
             soma += avaliacoes[i][j];
             totalAvaliacoes++;
         }
 
-        if (qtdAvaliacoes[i] > 0) {
+        if (qtdAvaliacoes[i] > 0)
+        {
 
             float media = (float)soma / qtdAvaliacoes[i];
 
@@ -323,16 +399,26 @@ void mostrarAvaliacoes(Jogo jogos[],
                    jogos[i].nome,
                    media);
 
-            if (media > melhorMedia) {
+            if (media > melhorMedia)
+            {
                 melhorMedia = media;
                 melhor = i;
             }
         }
     }
 
+    // Verificar se existem avaliações registradas
+    if (totalAvaliacoes == 0)
+    {
+        printf("Nenhuma avaliacao registrada.\n");
+        return;
+    }
+
     printf("Total avaliacoes: %d\n", totalAvaliacoes);
 
-    if (melhor != -1) {
+    // Exibir jogo com maior média
+    if (melhor != -1)
+    {
         printf("Melhor avaliado: %s\n", jogos[melhor].nome);
     }
 }
